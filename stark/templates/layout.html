@@ -3,9 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>路飞学城</title>
-    <link rel="shortcut icon" href="{% static 'imgs/luffy-study-logo.png' %} ">
+    <title>CRM-让管理更简单</title>
+    {#    <link rel="shortcut icon" href="{% static 'imgs/luffy-study-logo.png' %} ">#}
     <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.css' %} "/>
+    <link rel="stylesheet" href="{% static 'plugins/datetimepicker/css/bootstrap-datetimepicker.css' %} "/>
     <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.css' %} "/>
     <link rel="stylesheet" href="{% static 'css/commons.css' %} "/>
     <link rel="stylesheet" href="{% static 'css/nav.css' %} "/>
@@ -176,8 +177,10 @@
         </div>
     </div>
     <div class="right-body">
+        <div>
+{#            时间选择框#}
 
-
+        </div>
         {% block content %} {% endblock %}
     </div>
 </div>
@@ -185,6 +188,22 @@
 
 <script src="{% static 'js/jquery-3.3.1.min.js' %} "></script>
 <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %} "></script>
+<script src="{% static 'plugins/datetimepicker/js/bootstrap-datetimepicker.js' %} "></script>
+<script src="{% static 'plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js' %} "></script>
+<script>
+    $('.form_date').datetimepicker({
+        language:  'zh-CN',
+		startView: 2,
+		minView: 'month',
+		forceParse: 0,
+        startDate:new Date(),
+        autoclose: true,
+        pickerPosition:'bottom-left',
+        format:'yyyy-mm-dd',
+        sideBySide:true,
+        bootcssVer:3,
+    });
+</script>
 {% block js %} {% endblock %}
 <script type="text/javascript" src="/static/rbac.js"></script>
 </body>

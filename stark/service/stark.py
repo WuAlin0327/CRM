@@ -21,6 +21,7 @@ class BaseModelForm(forms.ModelForm):
         for name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
+
 class StarkForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(StarkForm, self).__init__(*args, **kwargs)
@@ -46,16 +47,15 @@ class SearchGroupRow(object):
     def __iter__(self):
         # 如果一个类中定义类iter方法且返回了一个迭代器，那么称这个类为可迭代对象
 
-
         yield self.title
         total_queryset_dict = self.query_dict.copy()
         orgin_value_list = self.query_dict.getlist(self.option.field)
         if not orgin_value_list:
-            span = '<a href="%s" class="btn btn-primary">{}</a>'%total_queryset_dict.urlencode()
+            span = '<a href="%s" class="btn btn-primary">{}</a>' % total_queryset_dict.urlencode()
 
         else:
             total_queryset_dict.pop(self.option.field)
-            span = '<a href="?%s" class="btn btn-default">{}</a>'%total_queryset_dict.urlencode()
+            span = '<a href="?%s" class="btn btn-default">{}</a>' % total_queryset_dict.urlencode()
         yield span.format('全部')
 
         for item in self.data_list:
@@ -69,39 +69,34 @@ class SearchGroupRow(object):
                 query_dict[self.option.field] = value
                 if value in orgin_value_list:
                     query_dict.pop(self.option.field)
-                    yield '<a href="?%s" class="btn btn-primary">%s</a>'% (query_dict.urlencode(), text)
+                    yield '<a href="?%s" class="btn btn-primary">%s</a>' % (query_dict.urlencode(), text)
                 else:
-                    yield '<a href="?%s" class="btn btn-default">%s</a>'%(query_dict.urlencode(),text)
+                    yield '<a href="?%s" class="btn btn-default">%s</a>' % (query_dict.urlencode(), text)
             else:
                 multi_value_list = query_dict.getlist(self.option.field)
                 if value in multi_value_list:
                     multi_value_list.remove(value)
-                    query_dict.setlist(self.option.field,multi_value_list)
-                    yield '<a href="?%s" class="btn btn-primary">%s</a>'% (query_dict.urlencode(), text)
+                    query_dict.setlist(self.option.field, multi_value_list)
+                    yield '<a href="?%s" class="btn btn-primary">%s</a>' % (query_dict.urlencode(), text)
 
                 else:
                     multi_value_list.append(value)
                     query_dict.setlist(self.option.field, multi_value_list)
-                    yield '<a href="?%s" class="btn btn-default">%s</a>'%(query_dict.urlencode(),text)
+                    yield '<a href="?%s" class="btn btn-default">%s</a>' % (query_dict.urlencode(), text)
 
-
-
-
-
-    def get_text(self,item_obj):
+    def get_text(self, item_obj):
         if isinstance(item_obj, tuple):
             return item_obj[1]
         return str(item_obj)
-    def get_value(self,item_obj):
-        if isinstance(item_obj,tuple):
+
+    def get_value(self, item_obj):
+        if isinstance(item_obj, tuple):
             return item_obj[0]
         return item_obj.pk
 
 
-
-
 class Option(object):
-    def __init__(self, field, is_multi=False,db_condition=None):
+    def __init__(self, field, is_multi=False, db_condition=None):
         """
 
         :param field: 字段
@@ -154,7 +149,6 @@ class StarkHandler(object):
     action_list = []
     search_group = []
 
-
     def get_search_group(self):
         return self.search_group
 
@@ -177,14 +171,14 @@ class StarkHandler(object):
             return '<a href="%s" class="btn btn-primary"><i class="fa fa-database" aria-hidden="true"></i>添加</a>' % self.reverse_add_url
         return None
 
-    def search_group_condition(self,request):
+    def search_group_condition(self, request):
         condition = {}
         for option in self.get_search_group():
             if option.is_multi:
                 values_list = request.GET.getlist(option.field)
                 if not values_list:
                     continue
-                condition['%s__in'%option.field] = values_list
+                condition['%s__in' % option.field] = values_list
             else:
                 value = request.GET.get(option.field)
                 if not value:
@@ -324,6 +318,7 @@ class StarkHandler(object):
             return render(request, 'stark/change.html', {'form': form})
         form = form_class(request.POST)
         if form.is_valid():
+            # teacher = form.cleaned_data.pop('tech_teacher')
             obj.update(**form.cleaned_data)
             url = self.reverse_list_url()
             return redirect(url)
@@ -350,7 +345,7 @@ class StarkHandler(object):
         """
         form.save()
 
-    def get_model_form_class(self,is_add=None):
+    def get_model_form_class(self, is_add=None):
         if self.model_form_class:
             return self.model_form_class
 
@@ -504,6 +499,42 @@ class StarkHandler(object):
 
         return inner
 
+    @staticmethod
+    def get_datetime_text(title, field, datetime_format='%Y年%m月%d日'):
+        """
+        通过闭包函数实现选择列显示中文
+        :param title:需要在页面中显示的表头
+        :param field:ORM中的字段
+        format 要格式话的时间格式
+        :return:
+        """
+
+        def inner(self, obj, is_head):
+            if is_head:
+                return title
+            datetime = getattr(obj, field)
+            return datetime.strftime(datetime_format)
+
+        return inner
+
+    @staticmethod
+    def get_m2m_text(title, field):
+        """
+        通过闭包函数实现选择列显示中文
+        :param title:需要在页面中显示的表头
+        :param field:ORM中的字段
+        format 要格式话的时间格式
+        :return:
+        """
+
+        def inner(self, obj, is_head):
+            if is_head:
+                return title
+
+            return ','.join([str(item) for item in getattr(obj,field).all()])
+
+        return inner
+
     def extra_urls(self):
         """
         额外的增加url：
@@ -614,6 +645,9 @@ class StarkSite(object):
     @property
     def urls(self):
         return self.get_urls(), self.app_name, self.namespace
+
+
+
 
 
 site = StarkSite()

@@ -40,10 +40,6 @@ class UserInfo(models.Model):
     password = models.CharField(verbose_name='密码', max_length=256)
     roles = models.ManyToManyField(verbose_name='用户的角色', to=Role)
 
-
-    def __str__(self):
-        return self.username
-
     class Meta:
         abstract = True
 
