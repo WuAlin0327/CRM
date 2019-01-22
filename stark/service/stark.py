@@ -187,6 +187,9 @@ class StarkHandler(object):
 
         return condition
 
+    def get_queryset(self, request, *args, **kwargs):
+
+        return self.model_class.objects
     def changelist_view(self, request, *args, **kwargs):
         """
         列表页面
@@ -225,9 +228,9 @@ class StarkHandler(object):
         if search_val:
             for item in search_list:
                 conn.children.append((item, search_val))
-            queryset = self.model_class.objects.filter(conn).filter(**condition).order_by(*order_list)
+            queryset = self.get_queryset(request, *args, **kwargs).filter(conn).filter(**condition).order_by(*order_list)
         else:
-            queryset = self.model_class.objects.all().filter(**condition).order_by(*order_list)
+            queryset = self.get_queryset(request, *args, **kwargs).filter(**condition).order_by(*order_list)
 
         # 处理表头
         # 假设页面要显示列：['username','password','email']

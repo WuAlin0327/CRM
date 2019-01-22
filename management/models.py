@@ -74,8 +74,8 @@ class Customer(models.Model):
     """
     客户表
     """
-    qq = models.CharField(verbose_name='联系方式', max_length=64, unique=True, help_text='QQ号/微信/手机号')
     name = models.CharField(verbose_name='姓名', max_length=16)
+    qq = models.CharField(verbose_name='联系方式', max_length=64, unique=True, help_text='QQ号/微信/手机号')
     status_choices = [
         (1, '已报名'),
         (2, '未报名')
@@ -120,7 +120,7 @@ class Customer(models.Model):
         on_delete=models.CASCADE
     )
     consultant = models.ForeignKey(verbose_name='课程顾问', to='UserInfo', related_name='consultant', null=True, blank=True,
-                                   on_delete=models.CASCADE)
+                                   on_delete=models.CASCADE, limit_choices_to={'depart__title': '销售部'})
     course = models.ManyToManyField(verbose_name='咨询课程', to='Course')
     education_choices = (
         (1, '重点大学'),
@@ -149,7 +149,7 @@ class Customer(models.Model):
         (1, '在职'),
         (2, '无业'),
     )
-    work_status = models.IntegerField(verbose_name='职业状态', default=1, blank=True)
+    work_status = models.IntegerField(verbose_name='职业状态', choices=work_status_choices, default=1, blank=True)
     company = models.CharField(verbose_name='目前就职公司', max_length=64, blank=True, null=True)
     salary = models.CharField(verbose_name='当前薪资', max_length=64, blank=True, null=True)
     date = models.DateField(verbose_name='咨询时间', auto_now_add=True)
@@ -157,3 +157,15 @@ class Customer(models.Model):
 
     def __str__(self):
         return "姓名：%s,联系方式:%s" % (self.name, self.qq)
+
+
+class ConsultRecord(models.Model):
+    """
+    跟进记录
+    """
+    customer = models.ForeignKey(verbose_name='所咨询的客户', to='Customer', on_delete=models.CASCADE,
+                                 limit_choices_to={''})
+    consultant = models.ForeignKey(verbose_name='跟踪人', to='UserInfo', on_delete=models.CASCADE,
+                                   limit_choices_to={'depart__title': '销售部'})
+    date = models.DateField(verbose_name='跟进日期', auto_now_add=True,null=True)
+    note = models.TextField(verbose_name='跟进内容')

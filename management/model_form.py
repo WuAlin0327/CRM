@@ -63,5 +63,10 @@ class ClassModelForm(BaseModelForm):
         widgets = {
             'start_date':DateTimeInput(),
             'graduate_date':DateTimeInput()
-
         }
+
+
+class CustomerModelForm(BaseModelForm):
+    class Meta:
+        model = models.Customer
+        exclude = ['consultant']

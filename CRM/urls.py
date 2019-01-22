@@ -20,5 +20,6 @@ from stark.service.stark import site
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rbac/',include('rbac.urls',namespace='rbac')),
+    path('',include('management.urls')),
     path('stark/',site.urls)
 ]
