@@ -140,6 +140,7 @@ class StarkHandler(object):
     action_list ：该列表接收一个对数据进行批量操作的函数
     search_group ：分组搜索的字段，接收一个Option类的实例
     """
+    change_list_template = None
     list_display = []
     per_page = 10
     has_add_btn = True
@@ -166,9 +167,11 @@ class StarkHandler(object):
         self.prev = prev
         self.request = None
 
-    def get_add_btn(self):
+    def get_add_btn(self, request, *args, **kwargs):
         if self.has_add_btn:
-            return '<a href="%s" class="btn btn-primary"><i class="fa fa-database" aria-hidden="true"></i>添加</a>' % self.reverse_add_url
+            # print(self.reverse_base_url(self.get_add_url_name, args, kwargs))
+            return '<a href="%s" class="btn btn-primary"><i class="fa fa-database" aria-hidden="true"></i>添加</a>' % self.reverse_base_url(
+                self.get_add_url_name, *args, **kwargs)
         return None
 
     def search_group_condition(self, request):
@@ -190,6 +193,7 @@ class StarkHandler(object):
     def get_queryset(self, request, *args, **kwargs):
 
         return self.model_class.objects
+
     def changelist_view(self, request, *args, **kwargs):
         """
         列表页面
@@ -228,7 +232,8 @@ class StarkHandler(object):
         if search_val:
             for item in search_list:
                 conn.children.append((item, search_val))
-            queryset = self.get_queryset(request, *args, **kwargs).filter(conn).filter(**condition).order_by(*order_list)
+            queryset = self.get_queryset(request, *args, **kwargs).filter(conn).filter(**condition).order_by(
+                *order_list)
         else:
             queryset = self.get_queryset(request, *args, **kwargs).filter(**condition).order_by(*order_list)
 
@@ -267,21 +272,22 @@ class StarkHandler(object):
             if list_dispyay:
                 for key in list_dispyay:
                     if isinstance(key, FunctionType):
-                        row_List.append(key(self, item, is_head=False))
+                        row_List.append(key(self, item, is_head=False,*args,**kwargs))
                     else:
                         row_List.append(getattr(item, key))
             else:
                 row_List.append(item)
             body_list.append(row_List)
 
+        add_btn = self.get_add_btn(request, *args, **kwargs)
         return render(
             request,
-            'stark/list.html',
+            self.change_list_template or 'stark/list.html',
             {
                 'header_list': header_list,
                 'body_list': body_list,
                 'pager': pager,
-                'handler': self,
+                'add_btn': add_btn,
                 'search_list': search_list,
                 'search_val': search_val,
                 'action_dict': action_dict,
@@ -301,8 +307,8 @@ class StarkHandler(object):
             return render(request, 'stark/change.html', {'form': form})
         form = model_form(request.POST)
         if form.is_valid():
-            self.save(form)
-            url = self.reverse_list_url()
+            self.save(form, request, *args, **kwargs)
+            url = self.reverse_list_url(request, *args, **kwargs)
             return redirect(url)
         return render(request, 'stark/change.html', {'form': form})
 
@@ -323,7 +329,7 @@ class StarkHandler(object):
         if form.is_valid():
             # teacher = form.cleaned_data.pop('tech_teacher')
             obj.update(**form.cleaned_data)
-            url = self.reverse_list_url()
+            url = self.reverse_list_url(request, *args, **kwargs)
             return redirect(url)
         return render(request, 'stark/change.html', {'form': form})
 
@@ -334,19 +340,37 @@ class StarkHandler(object):
         :param pk:
         :return:
         """
-        url = self.reverse_list_url()
+        url = self.reverse_list_url(request, *args, **kwargs)
         if request.method == 'GET':
             return render(request, 'stark/delete.html', {'cancel': url})
         self.model_class.objects.filter(pk=pk).delete()
         return redirect(url)
 
-    def save(self, form):
+    def save(self, form, request, *args, **kwargs):
         """
         用户可以进行重写，保存的默认值
         :param form:
         :return:
         """
         form.save()
+
+    def reverse_base_url(self, name, *args, **kwargs):
+        """
+        根据传入的值生成代理源搜索条件的URL；
+        :param name: self.get_list_url_name,self.get_change_url_name,self.get_delete_url_name
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        base_url = reverse(self.site.namespace + ':' + name, args=args, kwargs=kwargs)
+        if not self.request.GET:
+            add_url = base_url
+        else:
+            value = self.request.GET.urlencode()
+            new_quert_dict = QueryDict(mutable=True)
+            new_quert_dict['_filter'] = value
+            add_url = '%s?%s' % (base_url, new_quert_dict.urlencode())
+        return add_url
 
     def get_model_form_class(self, is_add=None):
         if self.model_form_class:
@@ -365,41 +389,7 @@ class StarkHandler(object):
             app_label, model_name, param)
         return url_name
 
-    @property
-    def reverse_add_url(self):
-        """
-        根据源搜索条件生成的编辑url
-        :return:
-        """
-        base_url = reverse(self.site.namespace + ':' + self.get_add_url_name)
-        if not self.request.GET:
-            add_url = base_url
-        else:
-            value = self.request.GET.urlencode()
-            new_quert_dict = QueryDict(mutable=True)
-            new_quert_dict['_filter'] = value
-            add_url = '%s?%s' % (base_url, new_quert_dict.urlencode())
-        return add_url
-
-    def reverse_name_url(self, name, *args, **kwargs):
-        """
-        根据传入的值生成代理源搜索条件的URL；
-        :param name: self.get_list_url_name,self.get_change_url_name,self.get_delete_url_name
-        :param args:
-        :param kwargs:
-        :return:
-        """
-        base_url = reverse(self.site.namespace + ':' + name, args=args, kwargs=kwargs)
-        if not self.request.GET:
-            add_url = base_url
-        else:
-            value = self.request.GET.urlencode()
-            new_quert_dict = QueryDict(mutable=True)
-            new_quert_dict['_filter'] = value
-            add_url = '%s?%s' % (base_url, new_quert_dict.urlencode())
-        return add_url
-
-    def reverse_list_url(self):
+    def reverse_list_url(self, request, *args, **kwargs):
         """
         跳转回列表页面
         解析带有源搜索条件的url
@@ -407,7 +397,7 @@ class StarkHandler(object):
         :return:
         """
         _filter = self.request.GET.get('_filter')
-        base_url = reverse('%s:%s' % (self.site.namespace, self.get_list_url_name))
+        base_url = reverse('%s:%s' % (self.site.namespace, self.get_list_url_name), args=args, kwargs=kwargs)
         return base_url if not _filter else '%s?%s' % (base_url, _filter)
 
     @property
@@ -534,7 +524,7 @@ class StarkHandler(object):
             if is_head:
                 return title
 
-            return ','.join([str(item) for item in getattr(obj,field).all()])
+            return ','.join([str(item) for item in getattr(obj, field).all()])
 
         return inner
 
@@ -547,7 +537,7 @@ class StarkHandler(object):
         """
         return []
 
-    def display_edit(self, obj, is_head=None):
+    def display_edit(self, obj, is_head=None,*args,**kwargs):
         """
         自定义页面显示的列(表头和内容）
             编辑
@@ -557,10 +547,10 @@ class StarkHandler(object):
         """
         if is_head:
             return '编辑'
-        url = self.reverse_name_url(name=self.get_change_url_name, pk=obj.pk)
+        url = self.reverse_base_url(name=self.get_change_url_name,pk=obj.pk,*args,**kwargs)
         return mark_safe('<a href="%s">编辑</a>' % url)
 
-    def display_remove(self, obj, is_head=None):
+    def display_remove(self, obj, is_head=None,*args,**kwargs):
         """
         自定义页面显示的列(表头和内容）
             删除
@@ -570,7 +560,7 @@ class StarkHandler(object):
         """
         if is_head:
             return '删除'
-        url = self.reverse_name_url(name=self.get_delete_url_name, pk=obj.pk)
+        url = self.reverse_base_url(name=self.get_delete_url_name, pk=obj.pk,*args,**kwargs)
         return mark_safe('<a href="%s">删除</a>' % url)
 
     def display_checkbox(self, obj, is_head=None):
@@ -648,9 +638,6 @@ class StarkSite(object):
     @property
     def urls(self):
         return self.get_urls(), self.app_name, self.namespace
-
-
-
 
 
 site = StarkSite()

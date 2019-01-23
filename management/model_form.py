@@ -70,3 +70,9 @@ class CustomerModelForm(BaseModelForm):
     class Meta:
         model = models.Customer
         exclude = ['consultant']
+
+
+class RecoreModelForm(BaseModelForm):
+    class Meta:
+        model = models.ConsultRecord
+        fields = ['note']

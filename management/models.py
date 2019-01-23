@@ -158,14 +158,15 @@ class Customer(models.Model):
     def __str__(self):
         return "姓名：%s,联系方式:%s" % (self.name, self.qq)
 
+def func():
+    return UserInfo.objects.filter(depart__title='销售部')
+
 
 class ConsultRecord(models.Model):
     """
     跟进记录
     """
-    customer = models.ForeignKey(verbose_name='所咨询的客户', to='Customer', on_delete=models.CASCADE,
-                                 limit_choices_to={''})
-    consultant = models.ForeignKey(verbose_name='跟踪人', to='UserInfo', on_delete=models.CASCADE,
-                                   limit_choices_to={'depart__title': '销售部'})
+    customer = models.ForeignKey(verbose_name='所咨询的客户', to='Customer', on_delete=models.CASCADE,)
+    consultant = models.ForeignKey(verbose_name='跟踪人', to='UserInfo', on_delete=models.CASCADE,limit_choices_to={'depart__title':'销售部'})
     date = models.DateField(verbose_name='跟进日期', auto_now_add=True,null=True)
     note = models.TextField(verbose_name='跟进内容')
