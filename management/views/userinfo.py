@@ -30,7 +30,7 @@ class UserInfoHandler(StarkHandler):
         if form.is_valid():
             userinfo_obj.password = form.cleaned_data['password']
             userinfo_obj.save()
-            return redirect(self.reverse_list_url())
+            return redirect(self.reverse_list_url(*args, **kwargs))
         return render(request, 'stark/change.html', {'form': form})
 
     def extra_urls(self):
@@ -43,7 +43,7 @@ class UserInfoHandler(StarkHandler):
         ]
         return patterns
 
-    def display_reset_password(self, obj, is_head=None):
+    def display_reset_password(self, obj, is_head=None,*args,**kwargs):
         if is_head:
             return '重置密码'
         url = self.reverse_base_url(name=self.get_reset_url_name, pk=obj.pk)

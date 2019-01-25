@@ -272,7 +272,7 @@ class StarkHandler(object):
             if list_dispyay:
                 for key in list_dispyay:
                     if isinstance(key, FunctionType):
-                        row_List.append(key(self, item, is_head=False,*args,**kwargs))
+                        row_List.append(key(self, item, is_head=False, *args, **kwargs))
                     else:
                         row_List.append(getattr(item, key))
             else:
@@ -301,16 +301,26 @@ class StarkHandler(object):
         :return:
         """
         model_form = self.get_model_form_class(is_add=True)
-
         if request.method == 'GET':
             form = model_form()
             return render(request, 'stark/change.html', {'form': form})
         form = model_form(request.POST)
         if form.is_valid():
-            self.save(form, request, *args, **kwargs)
+            response = self.save(form, request, *args, **kwargs)
             url = self.reverse_list_url(request, *args, **kwargs)
-            return redirect(url)
+            return response or redirect(url)
         return render(request, 'stark/change.html', {'form': form})
+
+    def get_change_object(self, request, pk, *args, **kwargs):
+        """
+        自定义的钩子方法，获取需要更改的数据，pk是数据的主键，返回值是一个queryset对象
+            默认更改的数据是主键与pk对应，如果需要再加查询条件可以使用**kwargs，
+        :param pk:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        return self.model_class.objects.filter(id=pk)
 
     def change_view(self, request, pk, *args, **kwargs):
         """
@@ -318,9 +328,11 @@ class StarkHandler(object):
         :param request:
         :return:
         """
-        obj = self.model_class.objects.filter(id=pk)
+        obj = self.get_change_object(request, pk, *args, **kwargs)
         if not obj.first():
-            return HttpResponse('要更改的数据不存在，请重新选择')
+            response = HttpResponse('要更改的数据不存在，请重新选择')
+            response.status_code = 404
+            return response
         form_class = self.get_model_form_class(is_add=False)
         if request.method == 'GET':
             form = form_class(instance=obj.first())
@@ -333,6 +345,18 @@ class StarkHandler(object):
             return redirect(url)
         return render(request, 'stark/change.html', {'form': form})
 
+    def delete_object(self, request, pk, *args, **kwargs):
+        """
+        与编辑页面类似，默认是删除主键pk，如果删除时需要加其他的条件，避免影响数据安全，可以重写这个方法
+        :param request:
+        :param pk:
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        self.model_class.objects.filter(pk=pk).delete()
+
+
     def delete_view(self, request, pk, *args, **kwargs):
         """
         删除页面
@@ -343,14 +367,14 @@ class StarkHandler(object):
         url = self.reverse_list_url(request, *args, **kwargs)
         if request.method == 'GET':
             return render(request, 'stark/delete.html', {'cancel': url})
-        self.model_class.objects.filter(pk=pk).delete()
-        return redirect(url)
+        response = self.delete_object(request, pk, *args, **kwargs)
+        return response or redirect(url)
 
     def save(self, form, request, *args, **kwargs):
         """
         用户可以进行重写，保存的默认值
         :param form:
-        :return:
+        :return: save函数可以返回一个响应对象，响应对象一般是错误信息，如果返回值为空则表示添加成功跳转到对应表的列表页面
         """
         form.save()
 
@@ -537,7 +561,7 @@ class StarkHandler(object):
         """
         return []
 
-    def display_edit(self, obj, is_head=None,*args,**kwargs):
+    def display_edit(self, obj, is_head=None, *args, **kwargs):
         """
         自定义页面显示的列(表头和内容）
             编辑
@@ -547,10 +571,10 @@ class StarkHandler(object):
         """
         if is_head:
             return '编辑'
-        url = self.reverse_base_url(name=self.get_change_url_name,pk=obj.pk,*args,**kwargs)
+        url = self.reverse_base_url(name=self.get_change_url_name, pk=obj.pk, *args, **kwargs)
         return mark_safe('<a href="%s">编辑</a>' % url)
 
-    def display_remove(self, obj, is_head=None,*args,**kwargs):
+    def display_remove(self, obj, is_head=None, *args, **kwargs):
         """
         自定义页面显示的列(表头和内容）
             删除
@@ -560,10 +584,10 @@ class StarkHandler(object):
         """
         if is_head:
             return '删除'
-        url = self.reverse_base_url(name=self.get_delete_url_name, pk=obj.pk,*args,**kwargs)
+        url = self.reverse_base_url(name=self.get_delete_url_name, pk=obj.pk, *args, **kwargs)
         return mark_safe('<a href="%s">删除</a>' % url)
 
-    def display_checkbox(self, obj, is_head=None):
+    def display_checkbox(self, obj, is_head=None, *args, **kwargs):
         if is_head:
             return '选择'
         return mark_safe('<input type="checkbox" value="%s" name="pk"/>' % obj.pk)

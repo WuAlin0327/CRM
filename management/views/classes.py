@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, HttpResponse
 
 
 class ClassesHandler(StarkHandler):
-    def display_semester(self, obj=None, is_head=None):
+    def display_semester(self, obj=None, is_head=None,*args,**kwargs):
         if is_head:
             return '班级'
         return obj
