@@ -156,7 +156,7 @@ class Customer(models.Model):
     last_consult_date = models.DateField(verbose_name='最后跟进日期', auto_now_add=True)
 
     def __str__(self):
-        return "姓名：%s,联系方式:%s" % (self.name, self.qq)
+        return self.name
 
 def func():
     return UserInfo.objects.filter(depart__title='销售部')
@@ -194,7 +194,7 @@ class PaymentRecord(models.Model):
         (3,'已驳回')
     )
     confirm_status = models.IntegerField(verbose_name='确认状态',choices=confirm_status_choices,default=1)
-    confirm_date = models.DateTimeField(verbose_name='申请日期',auto_now_add=True)
+    confirm_date = models.DateTimeField(verbose_name='确认',auto_now_add=True)
     confirm_user = models.ForeignKey(verbose_name='审批人',to='UserInfo',related_name='confirm',null=True,blank=True,on_delete=models.CASCADE)
 
     note = models.TextField(verbose_name='备注',blank=True,null=True)

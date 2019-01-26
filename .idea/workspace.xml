@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8fc8e00-f4d7-4c96-8290-ad4933601d24" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/management/views/payment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f6053e24-0872-4b1c-addc-40f528192f10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f6053e24-0872-4b1c-addc-40f528192f10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/management/views/check_payment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/model_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/management/model_form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/management/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/stark.py" beforeDir="false" afterPath="$PROJECT_DIR$/management/stark.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/views/private_customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/management/views/private_customer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stark/service/stark.py" beforeDir="false" afterPath="$PROJECT_DIR$/stark/service/stark.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management/views/payment.py" beforeDir="false" afterPath="$PROJECT_DIR$/management/views/payment_record.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stark/templates/stark/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/stark/templates/stark/list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,50 +77,50 @@
           <entry key="auth_user" value="10" />
           <entry key="auth_user_groups" value="1" />
           <entry key="auth_user_user_permissions" value="1" />
-          <entry key="html" value="31" />
+          <entry key="html" value="33" />
           <entry key="management_classlist" value="1" />
           <entry key="management_consultrecord" value="6" />
           <entry key="management_course" value="2" />
           <entry key="management_customer" value="4" />
           <entry key="management_customer_course" value="3" />
           <entry key="management_depart" value="3" />
-          <entry key="management_paymentrecord" value="1" />
+          <entry key="management_paymentrecord" value="2" />
           <entry key="management_student" value="1" />
           <entry key="management_student_class_list" value="1" />
           <entry key="management_userinfo" value="17" />
           <entry key="management_userinfo_roles" value="2" />
-          <entry key="md" value="8" />
-          <entry key="py" value="118" />
+          <entry key="md" value="9" />
+          <entry key="py" value="121" />
           <entry key="rbac_role" value="1" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="57" />
-          <entry key="HTML" value="31" />
-          <entry key="Markdown" value="8" />
+          <entry key="Database Element" value="58" />
+          <entry key="HTML" value="33" />
+          <entry key="Markdown" value="9" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="118" />
+          <entry key="Python" value="121" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Django Console" value="69" />
           <entry key="cell" value="59" />
-          <entry key="dummy" value="59" />
+          <entry key="dummy" value="70" />
           <entry key="html" value="1163" />
-          <entry key="md" value="465" />
-          <entry key="py" value="23065" />
-          <entry key="txt" value="127" />
+          <entry key="md" value="494" />
+          <entry key="py" value="24156" />
+          <entry key="txt" value="149" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="1163" />
-          <entry key="Markdown" value="465" />
-          <entry key="PLAIN_TEXT" value="186" />
-          <entry key="Python" value="23134" />
+          <entry key="Markdown" value="494" />
+          <entry key="PLAIN_TEXT" value="219" />
+          <entry key="Python" value="24225" />
           <entry key="Scratch" value="59" />
         </counts>
       </usages-collector>
@@ -142,8 +140,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stark/service/stark.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="307" column="27" selection-start-line="307" selection-start-column="27" selection-end-line="307" selection-end-column="27" />
+            <state relative-caret-position="241">
+              <caret line="234" column="109" lean-forward="true" selection-start-line="234" selection-start-column="109" selection-end-line="234" selection-end-column="109" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/stark/templates/layout.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-847">
+              <caret line="144" column="43" selection-start-line="144" selection-start-column="43" selection-end-line="144" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -158,45 +165,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/views/school.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="44" selection-start-column="44" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/management/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="213" column="17" lean-forward="true" selection-start-line="213" selection-start-column="17" selection-end-line="213" selection-end-column="17" />
+            <state relative-caret-position="300">
+              <caret line="179" column="14" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="14" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <element signature="e#892#1023#0" />
-                <element signature="e#2127#5051#0" />
-                <marker date="1548497343000" expanded="true" signature="296:301" ph="..." />
-                <marker date="1548497343000" expanded="true" signature="537:542" ph="..." />
-                <marker date="1548497343000" expanded="false" signature="1056:2009" ph="..." />
-                <marker date="1548497343000" expanded="true" signature="5064:5123" ph="..." />
-                <marker date="1548497343000" expanded="true" signature="5157:5162" ph="..." />
-                <marker date="1548497343000" expanded="true" signature="5281:5417" ph="..." />
-                <marker date="1548497343000" expanded="true" signature="5615:6766" ph="..." />
-                <marker date="1548497343000" expanded="true" signature="6794:6799" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="296:301" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="537:542" ph="..." />
+                <marker date="1548501293000" expanded="false" signature="1056:2009" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="5035:5094" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="5128:5133" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="5252:5388" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="5586:6735" ph="..." />
+                <marker date="1548501293000" expanded="true" signature="6763:6768" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management/views/payment.py">
+        <entry file="file://$PROJECT_DIR$/stark/templates/stark/list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="662">
-              <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+            <state relative-caret-position="-259">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/management/views/check_payment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
-                <marker date="1548498069000" expanded="true" signature="1632:1633" ph="..." />
-                <marker date="1548498069000" expanded="true" signature="2390:2395" ph="..." />
+                <element signature="e#0#44#0" expanded="true" />
+                <marker date="1548502498000" expanded="true" signature="119:124" ph="..." />
+                <marker date="1548502498000" expanded="true" signature="947:1643" ph="..." />
+                <marker date="1548502498000" expanded="true" signature="1720:1972" ph="..." />
               </folding>
             </state>
           </provider>
@@ -206,8 +213,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-136">
-                <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <first_editor relative-caret-position="436">
+                <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
               </first_editor>
               <second_editor />
             </state>
@@ -275,18 +282,19 @@
         <option value="$PROJECT_DIR$/management/views/public_customer.py" />
         <option value="$PROJECT_DIR$/templates/consult_record.html" />
         <option value="$PROJECT_DIR$/stark/tests.py" />
-        <option value="$PROJECT_DIR$/stark/templates/stark/list.html" />
         <option value="$PROJECT_DIR$/rbac/views/menu.py" />
         <option value="$PROJECT_DIR$/management/views/classes.py" />
         <option value="$PROJECT_DIR$/management/views/customer.py" />
         <option value="$PROJECT_DIR$/management/views/userinfo.py" />
         <option value="$PROJECT_DIR$/management/views/consult_record.py" />
-        <option value="$PROJECT_DIR$/management/stark.py" />
         <option value="$PROJECT_DIR$/management/views/private_customer.py" />
         <option value="$PROJECT_DIR$/management/model_form.py" />
         <option value="$PROJECT_DIR$/stark/service/stark.py" />
-        <option value="$PROJECT_DIR$/management/models.py" />
         <option value="$PROJECT_DIR$/management/views/payment.py" />
+        <option value="$PROJECT_DIR$/management/stark.py" />
+        <option value="$PROJECT_DIR$/stark/templates/stark/list.html" />
+        <option value="$PROJECT_DIR$/management/models.py" />
+        <option value="$PROJECT_DIR$/management/views/check_payment.py" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -298,8 +306,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="246" />
-    <option name="y" value="36" />
+    <option name="x" value="114" />
+    <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="971" />
   </component>
@@ -514,11 +522,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548490141690</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="学员缴费记录添加与缴费后创建学员信息">
+      <created>1548498209841</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1548498209841</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="246" y="36" width="1920" height="971" extended-state="0" />
+    <frame x="114" y="23" width="1920" height="971" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10702875" />
@@ -559,16 +574,10 @@
     <MESSAGE value="1" />
     <MESSAGE value="Merge branch 'master' of https://github.com/WuAlin0327/CRM&#10;&#10;# Conflicts:&#10;#&#9;README.md" />
     <MESSAGE value=" 合并" />
-    <option name="LAST_COMMIT_MESSAGE" value=" 合并" />
+    <MESSAGE value="学员缴费记录添加与缴费后创建学员信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="学员缴费记录添加与缴费后创建学员信息" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/django/forms/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="428" column="11" lean-forward="true" selection-start-line="428" selection-start-column="11" selection-end-line="428" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/management/utils/md5.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -701,13 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stark/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="144" column="43" selection-start-line="144" selection-start-column="43" selection-end-line="144" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stark/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -771,17 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stark/templates/stark/list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1518">
-          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
-          <folding>
-            <element signature="e#1390#1415#0#HTML" expanded="true" />
-            <element signature="e#3105#3134#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/django/db/models/fields/related.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -806,80 +797,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/views/consult_record.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/stark.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
-          <folding>
-            <element signature="e#1#30#0" expanded="true" />
-            <marker date="1548492154000" expanded="true" signature="597:599" ph="..." />
-            <marker date="1548492154000" expanded="true" signature="597:691" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/views/account.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/django/forms/fields.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="212" selection-start-line="212" selection-end-line="212" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stark/service/stark.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="307" column="27" selection-start-line="307" selection-start-column="27" selection-end-line="307" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="213" column="17" lean-forward="true" selection-start-line="213" selection-start-column="17" selection-end-line="213" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#892#1023#0" />
-            <element signature="e#2127#5051#0" />
-            <marker date="1548497343000" expanded="true" signature="296:301" ph="..." />
-            <marker date="1548497343000" expanded="true" signature="537:542" ph="..." />
-            <marker date="1548497343000" expanded="false" signature="1056:2009" ph="..." />
-            <marker date="1548497343000" expanded="true" signature="5064:5123" ph="..." />
-            <marker date="1548497343000" expanded="true" signature="5157:5162" ph="..." />
-            <marker date="1548497343000" expanded="true" signature="5281:5417" ph="..." />
-            <marker date="1548497343000" expanded="true" signature="5615:6766" ph="..." />
-            <marker date="1548497343000" expanded="true" signature="6794:6799" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/management/model_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
-          <folding>
-            <marker date="1548496779000" expanded="true" signature="2732:2737" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://f6053e24-0872-4b1c-addc-40f528192f10/schema/main/table/management_paymentrecord">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -897,10 +818,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management/views/payment.py">
+    <entry file="file://$PROJECT_DIR$/management/views/consult_record.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="662">
-          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        <state relative-caret-position="494">
+          <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/views/payment_record.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="49" column="11" lean-forward="true" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
             <marker date="1548498069000" expanded="true" signature="1632:1633" ph="..." />
@@ -909,11 +837,99 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/stark/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-847">
+          <caret line="144" column="43" selection-start-line="144" selection-start-column="43" selection-end-line="144" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/stark.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+          <folding>
+            <marker date="1548498992000" expanded="true" signature="667:669" ph="..." />
+            <marker date="1548498992000" expanded="true" signature="667:761" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f6053e24-0872-4b1c-addc-40f528192f10/schema/main/table/management_paymentrecord">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/model_form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+          <folding>
+            <marker date="1548496779000" expanded="true" signature="2732:2737" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stark/service/stark.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="234" column="109" lean-forward="true" selection-start-line="234" selection-start-column="109" selection-end-line="234" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/views/account.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stark/templates/stark/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-259">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="179" column="14" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#892#1023#0" />
+            <marker date="1548501293000" expanded="true" signature="296:301" ph="..." />
+            <marker date="1548501293000" expanded="true" signature="537:542" ph="..." />
+            <marker date="1548501293000" expanded="false" signature="1056:2009" ph="..." />
+            <marker date="1548501293000" expanded="true" signature="5035:5094" ph="..." />
+            <marker date="1548501293000" expanded="true" signature="5128:5133" ph="..." />
+            <marker date="1548501293000" expanded="true" signature="5252:5388" ph="..." />
+            <marker date="1548501293000" expanded="true" signature="5586:6735" ph="..." />
+            <marker date="1548501293000" expanded="true" signature="6763:6768" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management/views/check_payment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+            <marker date="1548502498000" expanded="true" signature="119:124" ph="..." />
+            <marker date="1548502498000" expanded="true" signature="947:1643" ph="..." />
+            <marker date="1548502498000" expanded="true" signature="1720:1972" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-136">
-            <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <first_editor relative-caret-position="436">
+            <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
           </first_editor>
           <second_editor />
         </state>
