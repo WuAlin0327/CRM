@@ -244,7 +244,7 @@ class StarkHandler(object):
         if list_dispyay:
             for key in list_dispyay:
                 if isinstance(key, FunctionType):
-                    verbose_name = key(self, obj=None, is_head=True)
+                    verbose_name = key(self, obj=None, is_head=True,*args,**kwargs)
                 else:
                     # 从模型表中取出verbose_name
                     verbose_name = self.model_class._meta.get_field(key).verbose_name
@@ -300,7 +300,7 @@ class StarkHandler(object):
         :param request:
         :return:
         """
-        model_form = self.get_model_form_class(is_add=True)
+        model_form = self.get_model_form_class(True,request,None,*args,**kwargs)
         if request.method == 'GET':
             form = model_form()
             return render(request, 'stark/change.html', {'form': form})
@@ -333,7 +333,7 @@ class StarkHandler(object):
             response = HttpResponse('要更改的数据不存在，请重新选择')
             response.status_code = 404
             return response
-        form_class = self.get_model_form_class(is_add=False)
+        form_class = self.get_model_form_class(False,request, pk, *args, **kwargs)
         if request.method == 'GET':
             form = form_class(instance=obj.first())
             return render(request, 'stark/change.html', {'form': form})
@@ -396,7 +396,7 @@ class StarkHandler(object):
             add_url = '%s?%s' % (base_url, new_quert_dict.urlencode())
         return add_url
 
-    def get_model_form_class(self, is_add=None):
+    def get_model_form_class(self,is_add,request, pk, *args, **kwargs):
         if self.model_form_class:
             return self.model_form_class
 
@@ -508,7 +508,7 @@ class StarkHandler(object):
         :return:
         """
 
-        def inner(self, obj, is_head):
+        def inner(self, obj, is_head,*args,**kwargs):
             if is_head:
                 return title
             fun = 'get_%s_display' % field
@@ -517,7 +517,7 @@ class StarkHandler(object):
         return inner
 
     @staticmethod
-    def get_datetime_text(title, field, datetime_format='%Y年%m月%d日'):
+    def get_datetime_text(title, field, datetime_format='%Y年%m月%d日',):
         """
         通过闭包函数实现选择列显示中文
         :param title:需要在页面中显示的表头
@@ -526,7 +526,7 @@ class StarkHandler(object):
         :return:
         """
 
-        def inner(self, obj, is_head):
+        def inner(self, obj, is_head,*args,**kwargs):
             if is_head:
                 return title
             datetime = getattr(obj, field)

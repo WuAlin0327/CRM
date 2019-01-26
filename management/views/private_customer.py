@@ -19,6 +19,12 @@ class PrivateCustomerHandler(StarkHandler):
         url = reverse('stark:management_consultrecord_list', kwargs={'customer_id': obj.pk})
         return mark_safe('<a target="_blank" href="%s">查看跟进<a/>' % (url))
 
+    def display_payment_record(self, obj=None, is_head=None):
+        if is_head:
+            return '缴费记录'
+        url = reverse('stark:management_paymentrecord_list', kwargs={'customer_id': obj.pk})
+        return mark_safe('<a target="_blank" href="%s">缴费<a/>'%url )
+
     @property
     def get_record_url_name(self):
         """
@@ -56,7 +62,8 @@ class PrivateCustomerHandler(StarkHandler):
         'major',
         StarkHandler.get_choice_text('工作经验', 'experence'),
         StarkHandler.get_datetime_text('咨询时间', 'date'),
-        display_record
+        display_record,
+        display_payment_record
     ]
 
     def multi_pop(self, request, *args, **kwargs):
