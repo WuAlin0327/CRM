@@ -170,3 +170,5 @@ class ConsultRecord(models.Model):
     consultant = models.ForeignKey(verbose_name='跟踪人', to='UserInfo', on_delete=models.CASCADE,limit_choices_to={'depart__title':'销售部'})
     date = models.DateField(verbose_name='跟进日期', auto_now_add=True,null=True)
     note = models.TextField(verbose_name='跟进内容')
+
+# 缴费记录与报名

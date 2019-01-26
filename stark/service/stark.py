@@ -351,7 +351,7 @@ class StarkHandler(object):
         :param request:
         :param pk:
         :param args:
-        :param kwargs:
+           :param kwargs:
         :return:
         """
         self.model_class.objects.filter(pk=pk).delete()
