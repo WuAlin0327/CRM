@@ -1,6 +1,8 @@
 from stark.service.stark import site, StarkHandler, Option
 from management import model_form
 from django.shortcuts import render, redirect, HttpResponse
+from django.utils.safestring import mark_safe
+
 
 
 class ClassesHandler(StarkHandler):
@@ -9,21 +11,28 @@ class ClassesHandler(StarkHandler):
             return '班级'
         return obj
 
+    def display_courserecord(self,obj=None,is_head=None,*args,**kwargs):
+        if is_head:
+            return '上课记录'
+        url = self.reverse_base_url('management_courserecord_list',class_id=obj.pk)
+        return mark_safe('<a target="_blank" href="%s">查看上课记录</a>'%url)
+
+
     list_display = [
         'school',
         display_semester,
         'price',
         StarkHandler.get_datetime_text('开班日期', 'start_date'),
-        'graduate_date',
+        StarkHandler.get_datetime_text('结业日期','graduate_date'),
         'class_teacher',
         StarkHandler.get_m2m_text('任课老师', 'tech_teacher'),
+        display_courserecord,
         'memo',
     ]
     model_form_class = model_form.ClassModelForm
     search_group = (
         Option('school'),
         Option('course'),
-        Option('class_teacher'),
     )
 
     def change_view(self, request, pk, *args, **kwargs):

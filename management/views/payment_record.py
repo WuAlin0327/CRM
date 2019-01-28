@@ -1,7 +1,7 @@
 from management import models
 from stark.service.stark import StarkHandler
 from django.conf.urls import url
-from management.model_form import PaymentModelForm,StudentModelForm
+from management.model_form import PaymentModelForm,StudentPaymentModelForm
 from django.shortcuts import HttpResponse
 
 
@@ -95,6 +95,6 @@ class PaymentHandler(StarkHandler):
         if customer_obj.exists():
             return PaymentModelForm
         else:
-            return StudentModelForm
+            return StudentPaymentModelForm
 
 

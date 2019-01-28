@@ -1,4 +1,4 @@
-from stark.service.stark import StarkHandler
+from stark.service.stark import StarkHandler,Option
 from django.conf.urls import url
 
 class CheckPaymentHandler(StarkHandler):
@@ -63,4 +63,7 @@ class CheckPaymentHandler(StarkHandler):
 
     search_list = [
         'customer__name__contains'
+    ]
+    search_group = [
+        Option('confirm_status')
     ]

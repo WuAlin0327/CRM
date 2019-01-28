@@ -79,7 +79,7 @@ class PrivateCustomerHandler(StarkHandler):
     def save(self, form,request,*args,**kwargs):
         form.instance.consultant_id = self.request.session['user']['id']
         form.save()
-        return True
+
 
     def get_queryset(self, request, *args, **kwargs):
         current_user_id = request.session['user'].get('id')

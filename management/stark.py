@@ -11,6 +11,10 @@ from management.views.public_customer import PublicCustomerHandler #班级的视
 from management.views.consult_record import ConsultRecordHandler
 from management.views.payment_record import PaymentHandler
 from management.views.check_payment import CheckPaymentHandler
+from management.views.student import StudentHandler
+from management.views.score_record import ScordHandler
+from management.views.course_record import CourseRecordHandler
+from management.views.study_record import StudyRecordHandler
 # 注册到stark组件中
 
 site.register(models.UserInfo, UserInfoHandler)
@@ -23,5 +27,8 @@ site.register(models.Customer, PrivateCustomerHandler, 'priv') # 私户
 site.register(models.ConsultRecord,ConsultRecordHandler)
 site.register(models.PaymentRecord,PaymentHandler)
 site.register(models.PaymentRecord,CheckPaymentHandler,'check')# 财务用的，查看所有的缴费申请与缴费记录
-
+site.register(models.Student,StudentHandler)
+site.register(models.ScoreRecord,ScordHandler)
+site.register(models.CourseRecord,CourseRecordHandler)
+site.register(models.StudyRecord,StudyRecordHandler)
 # 跟进记录
