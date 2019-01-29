@@ -44,7 +44,7 @@ class ClassesHandler(StarkHandler):
         obj = self.model_class.objects.filter(id=pk)
         if not obj.first():
             return HttpResponse('要更改的数据不存在，请重新选择')
-        form_class = self.get_model_form_class(is_add=False)
+        form_class = self.get_model_form_class(False,request,pk,*args,**kwargs)
         if request.method == 'GET':
             form = form_class(instance=obj.first())
             return render(request, 'stark/change.html', {'form': form})

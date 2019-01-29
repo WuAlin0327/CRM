@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load rbac %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,7 +172,7 @@
     <div class="left-menu">
         <div class="menu-body">
             <div class="static-menu">
-
+                {% multi_menu request %}
             </div>
 
         </div>
@@ -179,7 +180,7 @@
     <div class="right-body">
         <div>
 {#            时间选择框#}
-
+        {% url_record request %}
         </div>
         {% block content %} {% endblock %}
     </div>

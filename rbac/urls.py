@@ -14,11 +14,11 @@ urlpatterns = [
     url(r'^role/del/(?P<num>\d+)/$',role.role_del,name='role_del'),
 
 
-    path('user/list/',user.user_list,name='user_list'),
-    path('user/add/',user.user_add,name='user_add'),
-    url(r'^user/edit/(?P<num>\d+)/$',user.user_edit,name='user_edit'),
-    url(r'^user/del/(?P<num>\d+)/$',user.user_del,name='user_del'),
-    url(r'^user/reset_password/(?P<num>\d+)/$',user.reset_password,name='user_reset'),
+        # path('user/list/',user.user_list,name='user_list'),
+        # path('user/add/',user.user_add,name='user_add'),
+        # url(r'^user/edit/(?P<num>\d+)/$',user.user_edit,name='user_edit'),
+        # url(r'^user/del/(?P<num>\d+)/$',user.user_del,name='user_del'),
+        # url(r'^user/reset_password/(?P<num>\d+)/$',user.reset_password,name='user_reset'),
 
     path('menu/list/',menu.menu_list,name='menu_list'),
     path('menu/menu_add/',menu.menu_add,name='menu_add'),

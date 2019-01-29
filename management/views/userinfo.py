@@ -65,7 +65,7 @@ class UserInfoHandler(StarkHandler):
         Option('depart', is_multi=True)
     ]
 
-    def get_model_form_class(self, is_add=None):
+    def get_model_form_class(self,is_add,request,pk,*args,**kwargs):
         if is_add:
             return model_form.AddUserModelForm
         else:

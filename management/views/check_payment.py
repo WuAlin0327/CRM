@@ -38,7 +38,7 @@ class CheckPaymentHandler(StarkHandler):
             if not payment_object:
                 continue
             payment_object.confirm_status = 2
-            payment_object.consultant_id = user_id
+            payment_object.confirm_user_id = user_id
             payment_object.save()
 
             # 更新客户表中的客户状态

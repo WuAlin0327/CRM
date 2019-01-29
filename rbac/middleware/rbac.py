@@ -26,7 +26,6 @@ class RbacMiddleware(MiddlewareMixin):
 
         if not permission_dict:
             return HttpResponse('请进行登陆')
-
         for url in settings.NO_PERMISSION_URL:
             if re.match(url,request_url):
                 # 登陆后不需要权限就可以进行访问的
@@ -48,7 +47,6 @@ class RbacMiddleware(MiddlewareMixin):
                 flag = True
                 # 将pid值传递到inclusion_tag中，去进行选中渲染
                 request.selected_id = item['pid'] or item['id']
-
                 if not item['pid']:
                     url_record.extend([
                         {'title': item['title'], 'url': item['url'],'class':'disabled'}

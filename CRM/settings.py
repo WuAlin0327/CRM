@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rbac.middleware.rbac.RbacMiddleware'
 ]
 
 ROOT_URLCONF = 'CRM.urls'
@@ -122,3 +123,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+############## RBAC###########
+RBAC_USER_MODEL_CLASS = 'management.models.UserInfo'
+AUTO_EXCLUDE_LIST = [
+        '/admin/.*',
+        '/login/',
+        '/logout/',
+        '/index/'
+    ]
+PERMISSION_SESSION_KEY = 'permission_list'
+PERMISSION_SESSION_MENU = 'permission_menu_list'
+
+NO_PERMISSION_URL = [
+    '/logout/',
+    '/index/'
+]
+
+VALID_URL_LIST = [
+        '/login/',
+        '/admin/.*',
+]

@@ -103,14 +103,14 @@ def menu_edit(request, num):
     return render(request, 'rbac/change.html', {'form': form})
 
 
-def second_menu_add(request, menu_id):
+def second_menu_add(request, num):
     """
     添加二级菜单
     :param request:
     :param menu_id: 已选择的一级菜单ID（用于设置默认选中）
     :return:
     """
-    menu_obj = models.Menu.objects.filter(id=menu_id).first()
+    menu_obj = models.Menu.objects.filter(id=num).first()
     if request.method == 'POST':
         form = SecondMenuModelForm(request.POST)
         if form.is_valid():
@@ -409,7 +409,7 @@ def distribute_permission(request):
     else:
         user_id = None
 
-    user = models.UserInfo.objects.all()
+    user = user_class.objects.all()
     role = models.Role.objects.all()
     menu_permission_dict = {}
     # 一级菜单
